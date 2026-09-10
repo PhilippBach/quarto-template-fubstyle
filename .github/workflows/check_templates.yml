@@ -53,7 +53,7 @@ jobs:
           # Renders template-<format>.qmd using the `<theme>-<format>` format
           quarto render ${{ matrix.theme }}/template-${{ matrix.format }}.qmd \
             --to ${{ matrix.theme }}-${{ matrix.format }} \
-            --output-dir ${{ matrix.theme }}/_output
+            --output-dir _output
 
       - name: Upload rendered slides
         uses: actions/upload-artifact@v6
