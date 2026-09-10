@@ -1,0 +1,474 @@
+/*-- scss:defaults --*/
+$font-size-base: 1.1rem;
+$presentation-font-size-root: 24px;
+$font-size-lg: 1.25rem;
+$font-size-sm: 0.95rem;
+
+/* Vertical spacing between a slide's title and its content (for regular slides) */
+$slide-title-spacing: 1.5rem !default;
+
+/* Width of a "tab" used for indentation utilities */
+$tab-indent: 2rem !default;
+
+/* Highlight box config: width as percent of text width, and border thickness */
+$highlight-width: 80% !default;
+$highlight-border: 0.1rem !default;
+
+/* Task box config: border uses primary color and background is a light tint */
+$task-width: $highlight-width !default;
+$task-border: $highlight-border !default;
+$task-bg-color: #EEF5F6 !default;
+$task-border-color: #66909B !default;
+
+/* Theorem box config: neutral gray background (distinct from the tinted
+   callouts and the task box), bold blue accent border, larger type than
+   the callouts/task for emphasis */
+$theorem-border: $highlight-border !default;
+$theorem-bg-color: #F8F9FA !default;
+$theorem-border-color: #004659 !default;
+$theorem-font-size: 1.25rem !default;
+$theorem-label: "Theorem" !default;
+
+/* Task header (emoji + label) */
+$task-header-icon: "👩🏻‍" !default;
+$task-header-label: "Task" !default;
+$task-header-font-size: 0.95rem !default;
+$task-header-top: 0.35rem !default;
+
+/* gap between the task header (pseudo-element) and the task content */
+$task-content-gap: 1.25rem !default;
+
+/* Code block and output font sizes */
+$code-font-size: 1.15em !default;
+$code-output-font-size: 1.15em !default;
+
+/* Hide the logo on the title slide */
+.reveal #title-slide .slide-logo {
+  display: none; // FU-IMPORTANT
+}
+// Ensure subtitle, author, institute, and date use the site's font family
+.reveal .subtitle,
+.reveal .quarto-title-authors,
+.reveal .quarto-title-author,
+.reveal .institute,
+.reveal .date {
+  font-family: "Work Sans", "Alegreya Sans", "Droid Serif", "Palatino Linotype", "Book Antiqua", Palatino, "Microsoft YaHei", "Songti SC", sans-serif;
+}
+/*-- scss:defaults --*/
+
+@import url(https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300..700;1,300..700&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i,400,400i,500,500i,700,700i);
+@import url(https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css);
+
+@import url(https://use.fontawesome.com/releases/v6.1.1/css/all.css);
+
+// fonts
+$font-family-sans-serif: "Work Sans", "Alegreya Sans", "Droid Serif", "Palatino Linotype",
+  "Book Antiqua", Palatino, "Microsoft YaHei", "Songti SC", sans-serif !default;
+
+/* Brand colors */
+$fu-green: #CCFF00;
+$fu-blue: #004659;
+$fu-bluegreen: #66909B;
+$fu-blue-tint: #EEF5F6;
+$fu-blue-dark: #00303D;
+
+/* Neutral palette (shared with the website theme for a consistent look) */
+$gray-900: #1C2224;
+$gray-700: #4B5760;
+$gray-500: #8A959B;
+$gray-300: #DCE2E4;
+$gray-200: #EEF1F2;
+$gray-100: #F8F9FA;
+
+$text-color: $gray-900;
+$header-color: $fu-blue;
+$background-color: #ffffff;
+$link-color: $fu-blue;
+$text-bold-color: $fu-bluegreen;
+$code-highlight-color: $fu-green;
+$inverse-text-color: #ffffff;
+$inverse-background-color: $fu-blue;
+$inverse-header-color: #ffffff;
+$inverse-link-color: $fu-bluegreen;
+$title-slide-background-color: $fu-blue;
+$title-slide-text-color: $fu-green;
+$header-background-color: $fu-blue;
+$header-background-text-color: #ffffff;
+$primary: $fu-blue;
+$secondary: $fu-bluegreen;
+$white: #ffffff;
+$black: #000000;
+$body-color: $text-color;
+$border-radius: 0.6rem;
+$box-shadow-sm: 0 1px 4px rgba(0, 20, 30, 0.08);
+$box-shadow: 0 8px 24px rgba(0, 20, 30, 0.12);
+
+$code-output-background-color: $gray-900;
+$code-output-text-color: $gray-100;
+$code-output-border-color: $gray-900;
+
+
+/*-- scss:rules --*/
+body {
+  font-family: "Work Sans", "Alegreya Sans", "Droid Serif", "Palatino Linotype", "Book Antiqua", Palatino, "Microsoft YaHei", "Songti SC", sans-serif;
+  font-weight: normal;
+  h1 {
+    color: $fu-blue; // FU-IMPORTANT
+  }
+  h2 {
+    color: $fu-blue; // FU-IMPORTANT
+  }
+  h3 {
+    font-weight: 600;
+    color: $fu-blue; // FU-IMPORTANT
+  }
+}
+
+.reveal {
+  h1, h2, h3 {
+    font-family: "Work Sans", "Alegreya Sans", "Droid Serif", "Palatino Linotype", "Book Antiqua", Palatino, "Microsoft YaHei", "Songti SC", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: $fu-blue; // FU-IMPORTANT
+  }
+
+  a {
+    color: $link-color;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $fu-bluegreen;
+    }
+  }
+}
+
+.picture {
+  border-style: solid;
+  border-width: 2px;
+  border-color: $fu-bluegreen;
+  border-radius: 50%;
+  box-shadow: $box-shadow-sm;
+  padding: 5pt;
+  height: 50%;
+  width: auto;
+}
+
+#title-slide {
+  position: relative;
+  text-align: left;
+  color: $white; // FU-IMPORTANT
+  padding: 2em;
+
+  h1, .title {
+    position: relative;
+    color: $fu-green; // FU-IMPORTANT
+    font-weight: 700;
+    font-size: 2.5em;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.3em;
+    border-bottom: 3px solid rgba(204, 255, 0, 0.45);
+    max-width: 80%;
+  }
+
+  .subtitle,
+  .quarto-title-authors,
+  .quarto-title-author,
+  .institute,
+  .date {
+  color: rgba(255, 255, 255, 0.85); // FU-IMPORTANT
+    position: relative;
+    text-align: left;
+    margin-left: 0;
+    padding-left: 0;
+    font-weight: 400;
+  }
+
+  .quarto-title-authors {
+    justify-content: left;
+    .quarto-title-author {
+      padding-left: 0;
+      padding-right: 0;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  .institute, .date, p.date {
+    padding-left: 0;
+    text-align: left;
+  }
+}
+.footer {
+  bottom: 10px; // FU-IMPORTANT
+  color: $gray-500; // FU-IMPORTANT
+  font-family: "Work Sans", "Alegreya Sans", "Droid Serif", "Palatino Linotype", "Book Antiqua", Palatino, "Microsoft YaHei", "Songti SC", sans-serif;
+}
+
+.slide-menu-button {
+  left: 10px; // FU-IMPORTANT
+  bottom: 10px; // FU-IMPORTANT
+}
+
+.slide-number,
+.reveal.has-logo .slide-number {
+  bottom: 10px; // FU-IMPORTANT
+  right: 10px; // FU-IMPORTANT
+  top: unset; // FU-IMPORTANT
+  color: $gray-500; // FU-IMPORTANT
+  font-family: "Work Sans", "Alegreya Sans", "Droid Serif", "Palatino Linotype", "Book Antiqua", Palatino, "Microsoft YaHei", "Songti SC", sans-serif;
+}
+
+/* Tables: light tinted header, subtle striping, rounded container */
+.reveal table {
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  thead th {
+    background-color: $fu-blue-tint;
+    color: $fu-blue;
+    font-weight: 600;
+    border-bottom: none;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: $gray-100;
+  }
+}
+
+.cell-output {
+  border: 1px solid $gray-200;
+  border-radius: $border-radius;
+  background-color: $gray-100;
+}
+
+/* Code blocks and outputs: rounded, softly elevated, dark output panel */
+pre code,
+code.sourceCode {
+  font-size: $code-font-size;
+}
+
+div.sourceCode {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-sm;
+}
+
+.cell-output,
+.cell-output code {
+  font-size: $code-output-font-size;
+  border-radius: $border-radius;
+}
+
+.cell-output-stdout pre,
+.cell-output pre {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-sm;
+}
+
+code.sourceCode > span {
+  color: $body-bg; // FU-IMPORTANT
+}
+
+.center-x {
+  text-align: center;
+}
+
+/* Utility: indent a block by one tab width */
+.indent {
+  padding-left: $tab-indent;
+}
+
+/* Reduce tab indent on narrow viewports */
+@media (max-width: 640px) {
+  .indent {
+    padding-left: ($tab-indent / 2);
+  }
+}
+
+/* Highlighted text box: centered container, soft tint and shadow instead of a heavy border */
+.highlight {
+  width: $highlight-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.9rem 1.1rem;
+  border: $highlight-border solid $fu-blue-tint;
+  border-left: 0.3rem solid $primary;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-sm;
+  box-sizing: border-box;
+  background: $fu-blue-tint;
+  color: inherit;
+}
+
+/* Slightly wider highlight on narrow viewports so it remains readable */
+@media (max-width: 640px) {
+  .highlight {
+    width: 95%;
+  }
+}
+
+/* Callout boxes (note/tip/warning/important/caution): replace Quarto's default
+   two-tone header band + small 0.9rem body text with a single flat tinted box
+   --- same rounded-corner, soft-shadow look as .highlight, at the regular
+   body font size, with only the colored left border left to mark the type. */
+.reveal .callout.callout-style-default {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-sm;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  font-size: $font-size-base;
+
+  .callout-title {
+    background: transparent !important; // FU-IMPORTANT: flatten the header band
+    font-size: inherit;
+  }
+
+  .callout-content,
+  .callout-content p {
+    font-size: inherit;
+  }
+}
+
+.reveal .callout-note.callout-style-default {
+  background: $fu-blue-tint;
+}
+.reveal .callout-tip.callout-style-default {
+  background: #E3F5EC;
+}
+.reveal .callout-warning.callout-style-default {
+  background: #FDF1E0;
+}
+.reveal .callout-important.callout-style-default {
+  background: #FBE7E6;
+}
+.reveal .callout-caution.callout-style-default {
+  background: #FFEBDC;
+}
+
+/* Task box for in-class activities: soft tint, rounded corners, subtle shadow */
+.task {
+  width: $task-width;
+  margin-left: auto;
+  margin-right: auto;
+  /* leave room for the header inserted via ::before */
+  position: relative;
+  padding: 1.25rem 1.1rem 0.9rem 1.1rem;
+  border: $task-border solid $task-border-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-sm;
+  background: $task-bg-color;
+  box-sizing: border-box;
+  color: inherit;
+
+  /* small header with an icon */
+  &::before {
+    content: "👩🏻‍💻 Task";
+    position: absolute;
+    top: $task-header-top;
+    left: 1.1rem;
+  /* use the regular document font size and weight */
+  font-size: inherit;
+  font-weight: 600;
+  color: $primary;
+    background: transparent;
+    line-height: 1;
+  }
+
+  /* add space between the header pseudo-element and the first child inside the box */
+  > *:first-child {
+    margin-top: $task-content-gap;
+  }
+}
+
+@media (max-width: 640px) {
+  .task {
+    width: 95%;
+    padding: 1rem 0.9rem 0.6rem 0.9rem;
+  }
+  .task::before {
+    font-size: ($task-header-font-size - 0.1rem);
+    top: ($task-header-top - 0.05rem);
+    left: 0.9rem;
+  }
+}
+
+/* Theorem box: for formal statements (theorems, lemmas, propositions, ...).
+   Spans the full slide width (unlike the centered .task/.highlight boxes)
+   since these often contain wide display equations, uses a neutral gray
+   background + bold blue accent border to read as distinct from the
+   colored callouts, and a larger font size to signal formality.
+   Usage:
+     ::: {.theorem}
+     ... statement ...
+     :::
+   Add a name via the `data-name` attribute, shown as "Theorem (name)":
+     ::: {.theorem data-name="Frisch-Waugh-Lovell"}
+     ... statement ...
+     ::: */
+.theorem {
+  position: relative;
+  margin: 1rem 0;
+  padding: 1.25rem 1.1rem 1rem 1.1rem;
+  border: $theorem-border solid $gray-300;
+  border-left: 0.3rem solid $theorem-border-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-sm;
+  background: $theorem-bg-color;
+  box-sizing: border-box;
+  color: inherit;
+  font-size: $theorem-font-size;
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  &::before {
+    content: $theorem-label;
+    display: block;
+    font-weight: 700;
+    font-size: 0.8em; /* relative to the theorem box's own (larger) font size */
+    letter-spacing: 0.02em;
+    color: $theorem-border-color;
+    margin-bottom: 0.5rem;
+  }
+
+  &[data-name]::before {
+    content: $theorem-label " (" attr(data-name) ")";
+  }
+}
+
+@media (max-width: 640px) {
+  .theorem {
+    font-size: ($theorem-font-size - 0.1rem);
+    padding: 1rem 0.9rem;
+  }
+}
+
+
+/* Guard against a stray inline `display:block` reveal.js can leave on a slide
+   that has just transitioned to .past (seen on the slide immediately after
+   a `center`-classed title slide): without this, the "hidden" slide still
+   occupies layout space and pushes the next slide's content down. */
+.reveal .slides section:not(.present) {
+  display: none !important;
+}
+
+/* Add spacing below slide headings (title -> content) but keep the title slide unchanged */
+.reveal .slides section:not(#title-slide) h1,
+.reveal .slides section:not(#title-slide) h2,
+.reveal .slides section:not(#title-slide) .title {
+  margin-bottom: $slide-title-spacing;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid $gray-200;
+}
+
+/* Reduce spacing on narrow viewports */
+@media (max-width: 640px) {
+  .reveal .slides section:not(#title-slide) h1,
+  .reveal .slides section:not(#title-slide) h2,
+  .reveal .slides section:not(#title-slide) .title {
+    margin-bottom: ($slide-title-spacing / 2);
+  }
+}

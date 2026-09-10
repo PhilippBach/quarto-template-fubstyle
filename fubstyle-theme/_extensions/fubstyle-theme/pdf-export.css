@@ -1,0 +1,53 @@
+/* PDF Export Button — sits inline inside the revealjs footer */
+
+.footer .pdf-export-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.2em;
+  margin-left: 0.5em;
+  vertical-align: middle;
+  position: relative;
+  top: -0.1em;
+  color: inherit;
+  opacity: 0.65;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+/* Fallback when no footer element exists */
+.reveal > .pdf-export-btn {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  opacity: 0.65;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.pdf-export-btn:hover {
+  opacity: 1;
+}
+
+.pdf-export-btn svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  display: block;
+}
+
+@media print {
+  .pdf-export-btn {
+    display: none !important;
+  }
+}

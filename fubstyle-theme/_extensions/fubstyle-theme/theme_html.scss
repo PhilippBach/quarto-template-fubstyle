@@ -1,0 +1,306 @@
+/*-- scss:defaults --*/
+$font-size-base: 1.05rem;
+$font-size-lg: 1.2rem;
+$font-size-sm: 0.9rem;
+
+body {
+  font-family: "Work Sans", "Source Sans 3", "Alegreya Sans", "Droid Serif", "Palatino Linotype", "Book Antiqua", Palatino, "Microsoft YaHei", "Songti SC", sans-serif;
+  font-size: $font-size-base;
+  font-weight: normal;
+}
+/* Hide the logo on the title slide */
+#title-slide .slide-logo {
+  display: none; // FU-IMPORTANT
+}
+/*-- scss:defaults --*/
+
+@import url(https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300..700;1,300..700&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i,400,400i,500,500i,700,700i);
+@import url(https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css);
+
+@import url(https://use.fontawesome.com/releases/v6.1.1/css/all.css);
+
+// fonts
+$font-family-sans-serif: "Work Sans", "Source Sans 3", "Alegreya Sans", "Droid Serif", "Palatino Linotype",
+  "Book Antiqua", Palatino, "Microsoft YaHei", "Songti SC", sans-serif !default;
+
+/* Brand colors */
+$fu-green: #CCFF00;
+$fu-blue: #004659;
+$fu-bluegreen: #66909B;
+$fu-blue-tint: #EEF5F6;
+
+/* Neutral palette (softer than pure black/white for a lighter, modern feel) */
+$gray-900: #1C2224;
+$gray-700: #4B5760;
+$gray-500: #8A959B;
+$gray-300: #DCE2E4;
+$gray-200: #EEF1F2;
+$gray-100: #F8F9FA;
+
+$text-color: $gray-900;
+$header-color: $fu-blue;
+$background-color: #ffffff;
+$link-color: $fu-blue;
+$text-bold-color: $fu-bluegreen;
+$code-highlight-color: $fu-green;
+$inverse-text-color: #ffffff;
+$inverse-background-color: $fu-blue;
+$inverse-header-color: #ffffff;
+$inverse-link-color: $fu-bluegreen;
+$title-slide-background-color: #ffffff;
+$title-slide-text-color: $fu-blue;
+$header-background-color: $fu-blue;
+$header-background-text-color: #ffffff;
+$primary: $fu-blue;
+$secondary: $fu-bluegreen;
+$white: #ffffff;
+$black: #000000;
+
+$body-bg: $background-color;
+$body-color: $text-color;
+$border-color: $gray-300;
+
+/* Softer, rounder, slightly elevated look throughout */
+$border-radius: 0.6rem;
+$border-radius-sm: 0.4rem;
+$border-radius-lg: 0.9rem;
+$box-shadow-sm: 0 1px 3px rgba(0, 20, 30, 0.06);
+$box-shadow: 0 6px 20px rgba(0, 20, 30, 0.08);
+
+$headings-font-weight: 600;
+$navbar-padding-y: 0.9rem;
+$link-decoration: none;
+
+/*-- scss:rules --*/
+body {
+  line-height: 1.65;
+
+  h1 {
+    color: $fu-blue; // FU-IMPORTANT
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    color: $fu-blue; // FU-IMPORTANT
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 2.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid $gray-200;
+  }
+  h3 {
+    font-weight: 600;
+    color: $fu-bluegreen; // FU-IMPORTANT
+  }
+}
+
+a {
+  color: $fu-blue;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: $fu-bluegreen;
+    border-bottom-color: currentColor;
+  }
+}
+
+/* Title block at the top of website pages (index, syllabus, etc.) */
+.quarto-title-block {
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid $gray-200;
+
+  .title {
+    color: $fu-blue;
+    font-weight: 700;
+  }
+  .subtitle {
+    color: $fu-bluegreen;
+    font-weight: 400;
+  }
+}
+
+/* Navbar: light and airy instead of a solid brand-color bar */
+.navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid $gray-200;
+  box-shadow: $box-shadow-sm;
+
+  .navbar-brand,
+  .navbar-title {
+    color: $fu-blue !important;
+    font-weight: 700;
+  }
+
+  .navbar-nav .nav-link {
+    color: $gray-700 !important;
+    font-weight: 500;
+    border-radius: $border-radius-sm;
+    padding: 0.4rem 0.75rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover,
+    &:focus {
+      color: $fu-blue !important;
+      background-color: $fu-blue-tint;
+    }
+  }
+
+  .navbar-nav .nav-link.active,
+  .navbar-nav .show > .nav-link {
+    color: $fu-blue !important;
+  }
+
+  .dropdown-menu {
+    border: 1px solid $gray-200;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+  }
+}
+
+/* Callout boxes: soften with rounded corners and a light shadow */
+div.callout {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-sm;
+}
+
+/* Tables: light header, subtle striping, rounded container */
+.table,
+table {
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  thead th {
+    background-color: $fu-blue-tint;
+    color: $fu-blue;
+    font-weight: 600;
+    border-bottom: none;
+  }
+
+  td,
+  th {
+    padding: 0.65rem 0.9rem;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: $gray-100;
+  }
+}
+
+.picture {
+  border-style: solid;
+  border-width: 3pt;
+  border-color: $body-color;
+  border-radius: 50%;
+  padding: 5pt;
+  height: 50%;
+  width: auto;
+}
+
+#title-slide {
+  text-align: left;
+  background: $fu-blue; // FU-IMPORTANT
+  color: $white; // FU-IMPORTANT
+  padding: 2em;
+
+  h1, .title {
+  color: $fu-green; // FU-IMPORTANT
+  font-size: 2.2em; // FU-IMPORTANT
+  }
+
+  .quarto-title-authors,
+  .quarto-title-author,
+  .subtitle,
+  .date,
+  p,
+  a {
+  color: $white; // FU-IMPORTANT
+  }
+
+  .quarto-title-authors {
+    justify-content: left;
+    .quarto-title-author {
+      padding-left: 30%;
+      padding-right: 0;
+      width: 100%;
+    }
+  }
+
+  p.date {
+    padding-left: 30%;
+    text-align: left;
+  }
+}
+
+.footer {
+  bottom: 10px; // FU-IMPORTANT
+  color: $body-color; // FU-IMPORTANT
+}
+
+.slide-menu-button {
+  left: 10px; // FU-IMPORTANT
+  bottom: 10px; // FU-IMPORTANT
+}
+
+.slide-number,
+.reveal.has-logo .slide-number {
+  bottom: 10px; // FU-IMPORTANT
+  right: 10px; // FU-IMPORTANT
+  top: unset; // FU-IMPORTANT
+  color: $body-color; // FU-IMPORTANT
+}
+
+/* Page footer: quieter, more whitespace */
+.page-footer,
+footer.footer {
+  color: $gray-500;
+  border-top: 1px solid $gray-200;
+  padding-top: 1.5rem;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+.cell-output {
+  border: 1px solid $gray-200;
+  border-radius: $border-radius-sm;
+  background-color: $gray-100;
+}
+
+/* Code blocks: rounded, subtle border, soft background */
+pre,
+div.sourceCode {
+  border-radius: $border-radius-sm;
+  border: 1px solid $gray-200;
+  background-color: $gray-100 !important;
+}
+
+code {
+  border-radius: 0.3rem;
+}
+
+.btn,
+.btn-primary {
+  border-radius: $border-radius-sm;
+}
+
+.center-x {
+  text-align: center;
+}
+
+
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("_extensions/fubstyle-theme/assets/fonts/SourceSans3-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("_extensions/fubstyle-theme/assets/fonts/SourceSans3-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}

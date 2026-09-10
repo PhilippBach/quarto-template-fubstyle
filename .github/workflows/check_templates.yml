@@ -1,0 +1,62 @@
+name: Check Quarto Themes
+
+on:
+  push:
+    paths:
+      - '**/*.qmd'
+      - '**/*.scss'
+  pull_request:
+    paths:
+      - '**/*.qmd'
+      - '**/*.scss'
+  workflow_dispatch:
+
+
+jobs:
+  render-themes:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        theme:
+          - fubstyle-theme
+        format:
+          - revealjs
+          - html
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jupyter
+          pip install numpy
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install theme extension
+        run: |
+          # Tell Quarto about the local extension
+          quarto add ${{ matrix.theme }} --no-prompt
+
+      - name: Render demo with custom format
+        run: |
+          # Renders template-<format>.qmd using the `<theme>-<format>` format
+          quarto render ${{ matrix.theme }}/template-${{ matrix.format }}.qmd \
+            --to ${{ matrix.theme }}-${{ matrix.format }} \
+            --output-dir ${{ matrix.theme }}/_output
+
+      - name: Upload rendered slides
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ matrix.theme }}-${{ matrix.format }}
+          path: ${{ matrix.theme }}/_output

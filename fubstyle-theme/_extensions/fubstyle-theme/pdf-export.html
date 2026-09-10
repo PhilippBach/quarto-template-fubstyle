@@ -1,0 +1,48 @@
+<script>
+(function () {
+  // In print-pdf mode: auto-trigger the browser print dialog once revealjs has laid out all slides
+  if (/print-pdf/i.test(window.location.search)) {
+    window.addEventListener('load', function () {
+      setTimeout(window.print, 1000);
+    });
+    return;
+  }
+
+  var btn = document.createElement('a');
+  btn.className = 'pdf-export-btn';
+  btn.href = window.location.pathname +
+    (window.location.search ? window.location.search + '&print-pdf' : '?print-pdf') +
+    window.location.hash;
+  btn.target = '_blank';
+  btn.title = 'Export to PDF';
+  btn.setAttribute('aria-label', 'Export to PDF');
+  // Material Design "picture_as_pdf" icon
+  btn.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">' +
+      '<path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z' +
+      'M11.5 9.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1z' +
+      'M16.5 11.5c0 .83-.67 1.5-1.5 1.5H12.5V7H15c.83 0 1.5.67 1.5 1.5v3z' +
+      'M20.5 8.5H19v1h1.5V11H19v2h-1.5V7h3v1.5z' +
+      'M9 9.5h1v-1H9v1z' +
+      'M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z' +
+      'M14 11.5h1v-3h-1v3z"/>' +
+    '</svg>';
+
+  function attach() {
+    var footer = document.querySelector('.footer');
+    if (footer) {
+      footer.style.display = 'flex';
+      footer.style.alignItems = 'center';
+      footer.appendChild(btn);
+    } else {
+      (document.querySelector('.reveal') || document.body).appendChild(btn);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attach);
+  } else {
+    attach();
+  }
+}());
+</script>

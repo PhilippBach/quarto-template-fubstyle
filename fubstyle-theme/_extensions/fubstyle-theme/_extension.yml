@@ -1,0 +1,48 @@
+title: fubstyle-theme
+author: Philipp Bach based on UHH template
+version: 1.0.0
+quarto-required: ">=1.1.0"
+contributes:
+  formats:
+    html:
+      toc: true
+      theme: [default, theme_html.scss]
+      resources:
+        - assets/fonts/SourceSans3-Regular.ttf
+        - assets/fonts/SourceSans3-Bold.ttf
+        - assets/fonts/SourceSans3-RegularItalic.ttf
+        - assets/fonts/SourceSans3-SemiBoldItalic.ttf
+      
+    revealjs:
+      html:
+      toc: true
+      theme: [default, theme_revealjs.scss]
+      controls: true
+      transition: slide
+      background-transition: fade
+      highlight-style: github
+      css: [pdf-export.css]
+      include-after-body:
+        - pdf-export.html
+      footer: "FU Berlin"
+      title-slide-attributes:
+        data-background-gradient: "radial-gradient(circle at 88% 12%, rgba(204, 255, 0, 0.30) 0%, rgba(204, 255, 0, 0) 38%), radial-gradient(circle at 6% 96%, rgba(102, 144, 155, 0.55) 0%, rgba(102, 144, 155, 0) 45%), linear-gradient(155deg, #004659 0%, #00303D 100%)"
+      date-format: "D MMM YYYY"
+      chalkboard: # enables chalkboard see https://rajgoel.github.io/reveal.js-demos/chalkboard-demo.html#/
+        boardmarker-width: 5
+        theme: "chalkboard"
+      menu: true
+      slide-number: c
+      preview-links: true
+      scrollable: true
+      code-fold: false
+      include: true
+      resources:
+        - assets/fonts/SourceSans3-Regular.ttf
+        - assets/fonts/SourceSans3-Bold.ttf
+        - assets/fonts/SourceSans3-RegularItalic.ttf
+        - assets/fonts/SourceSans3-BoldItalic.ttf
+        - assets/test_image.png
+
+
+

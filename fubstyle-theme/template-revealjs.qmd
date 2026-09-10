@@ -1,0 +1,79 @@
+---
+title: "Title"
+subtitle: "Subtitle"
+author: "Author"
+institute: "Institute"
+date: today
+date-format: long
+footer: "Footer"
+---
+
+# Section Heading
+
+## Introduction
+
+*TODO* Create an example file that demonstrates the formatting and features of your format.
+
+## Highlight box
+
+Use `.highlight` to draw attention to a key statement.
+
+::: {.highlight}
+This is a **highlighted** callout box. It uses a soft tint background,
+a colored left border, and a subtle shadow.
+:::
+
+## Task box
+
+Use `.task` for in-class exercises or activities.
+
+::: {.task}
+Work through the example on the next slide and discuss your results
+with your neighbor.
+:::
+
+## Theorem box
+
+Use `.theorem` for formal statements. Add a name via the `data-name` attribute.
+
+::: {.theorem data-name="Frisch-Waugh-Lovell"}
+Let $y$, $D$, and $X$ be as defined above. Then the coefficient on $D$
+from a regression of $y$ on $D$ and $X$ equals the coefficient from a
+regression of the residuals of $y$ on the residuals of $D$, both
+regressed on $X$.
+:::
+
+## Centered & indented text
+
+::: {.center-x}
+This text is centered using `.center-x`.
+:::
+
+::: {.indent}
+This text is indented by one tab width using `.indent`.
+:::
+
+## Picture
+
+::: {.center-x}
+![](figures/test_image.png){.picture width="30%"}
+:::
+
+## Table example
+
+| Method     | RMSE | Coverage |
+|------------|-----:|---------:|
+| Naive      | 0.42 |     0.61 |
+| DoubleML   | 0.18 |     0.95 |
+
+## Code example
+
+```{python}
+import numpy as np
+
+x = np.array([0, 1, 2, 3])
+
+x
+```
+
+## Thank you
