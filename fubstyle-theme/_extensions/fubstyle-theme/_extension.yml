@@ -27,7 +27,7 @@ contributes:
       footer: "FU Berlin"
       title-slide-attributes:
         data-background-gradient: "radial-gradient(circle at 88% 12%, rgba(204, 255, 0, 0.30) 0%, rgba(204, 255, 0, 0) 38%), radial-gradient(circle at 6% 96%, rgba(102, 144, 155, 0.55) 0%, rgba(102, 144, 155, 0) 45%), linear-gradient(155deg, #004659 0%, #00303D 100%)"
-      date-format: "D MMM YYYY"
+      date-format: long
       chalkboard: # enables chalkboard see https://rajgoel.github.io/reveal.js-demos/chalkboard-demo.html#/
         boardmarker-width: 5
         theme: "chalkboard"
