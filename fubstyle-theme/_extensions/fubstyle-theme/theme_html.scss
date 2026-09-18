@@ -44,6 +44,10 @@ $background-color: #ffffff;
 $link-color: $fu-blue;
 $text-bold-color: $fu-bluegreen;
 $code-highlight-color: $fu-green;
+
+/* Optional / advanced exercise box: distinct accent color + icon */
+$optional-color: #7C3AED;
+$optional-bg: #F5F1FE;
 $inverse-text-color: #ffffff;
 $inverse-background-color: $fu-blue;
 $inverse-header-color: #ffffff;
@@ -165,6 +169,27 @@ a {
 div.callout {
   border-radius: $border-radius;
   box-shadow: $box-shadow-sm;
+}
+
+/* Optional / advanced exercise box: a highlighted callout for optional,
+   more challenging exercises aimed at students who want to go further.
+   It piggybacks on Quarto's own (untyped) callout, so besides being styled
+   here for HTML it also renders as a bordered box in PDF, and degrades to
+   a clean blockquote when the document is converted to a Jupyter
+   notebook (`quarto render ... --to ipynb`) -- classes added by a filter
+   at render time do not survive that conversion, so `.callout` must be
+   written explicitly in the source. The 🎓 in the title also doubles as
+   the "icon", since Quarto's icon slot is only wired up for its five
+   built-in callout types. Usage:
+     ::: {.callout .optional-exercise appearance="default" title="🎓 Optional — Advanced Exercise"}
+     ... exercise text ...
+     ::: */
+.optional-exercise.callout {
+  border-left-color: $optional-color !important; // FU-IMPORTANT
+
+  &.callout-style-default > .callout-header {
+    background-color: $optional-bg;
+  }
 }
 
 /* Tables: light header, subtle striping, rounded container */

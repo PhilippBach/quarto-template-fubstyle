@@ -29,6 +29,11 @@ $theorem-border-color: #004659 !default;
 $theorem-font-size: 1.25rem !default;
 $theorem-label: "Theorem" !default;
 
+/* Optional / advanced exercise box config: distinct accent color + icon,
+   built on top of Quarto's callout machinery (see optional-exercise.lua) */
+$optional-color: #7C3AED !default;
+$optional-bg: #F5F1FE !default;
+
 /* Task header (emoji + label) */
 $task-header-icon: "👩🏻‍" !default;
 $task-header-label: "Task" !default;
@@ -345,6 +350,29 @@ code.sourceCode > span {
 }
 .reveal .callout-caution.callout-style-default {
   background: #FFEBDC;
+}
+
+/* Optional / advanced exercise box: a highlighted callout for optional,
+   more challenging exercises aimed at students who want to go further.
+   It piggybacks on Quarto's own (untyped) callout, so besides being styled
+   here for revealjs it also renders as a bordered box in PDF, and degrades
+   to a clean blockquote when the document is converted to a Jupyter
+   notebook (`quarto render ... --to ipynb`) -- classes added by a filter
+   at render time do not survive that conversion, so `.callout` must be
+   written explicitly in the source. The 🎓 in the title also doubles as
+   the "icon", since revealjs's callout rendering has no icon slot at all.
+   Note: revealjs wraps the callout in an extra `.optional-exercise` div,
+   so (unlike the html format) the callout classes land one level down.
+   Usage:
+     ::: {.callout .optional-exercise appearance="default" title="🎓 Optional — Advanced Exercise"}
+     ... exercise text ...
+     ::: */
+.reveal .optional-exercise .callout.callout-style-default {
+  background: $optional-bg;
+  border-left-color: $optional-color !important; // FU-IMPORTANT
+}
+.reveal .optional-exercise .callout-title {
+  color: $optional-color;
 }
 
 /* Task box for in-class activities: soft tint, rounded corners, subtle shadow */

@@ -12,7 +12,7 @@ contributes:
         - assets/fonts/SourceSans3-Bold.ttf
         - assets/fonts/SourceSans3-RegularItalic.ttf
         - assets/fonts/SourceSans3-SemiBoldItalic.ttf
-      
+
     revealjs:
       html:
       toc: true
