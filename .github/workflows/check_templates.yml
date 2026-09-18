@@ -55,6 +55,18 @@ jobs:
             --to ${{ matrix.theme }}-${{ matrix.format }} \
             --output-dir _output
 
+      - name: Install TinyTeX
+        if: matrix.format == 'html'
+        run: quarto install tinytex --no-prompt
+
+      - name: Render demo to PDF
+        if: matrix.format == 'html'
+        run: |
+          # Also render the html template to PDF to check the pdf-export feature
+          quarto render ${{ matrix.theme }}/template-html.qmd \
+            --to pdf \
+            --output-dir _output
+
       - name: Upload rendered slides
         uses: actions/upload-artifact@v6
         with:
