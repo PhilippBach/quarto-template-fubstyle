@@ -67,6 +67,13 @@ jobs:
             --to pdf \
             --output-dir _output
 
+      - name: Convert demo to Jupyter Notebook
+        if: matrix.format == 'html'
+        run: |
+          # Checks that the html template degrades gracefully when converted to a notebook
+          quarto convert ${{ matrix.theme }}/template-html.qmd \
+            --output ${{ matrix.theme }}/_output/template-html.ipynb
+
       - name: Upload rendered slides
         uses: actions/upload-artifact@v6
         with:
