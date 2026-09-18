@@ -53,7 +53,8 @@ jobs:
           # Renders template-<format>.qmd using the `<theme>-<format>` format
           quarto render ${{ matrix.theme }}/template-${{ matrix.format }}.qmd \
             --to ${{ matrix.theme }}-${{ matrix.format }} \
-            --output-dir _output
+            --output-dir _output \
+            --output template-${{ matrix.format }}.html
 
       - name: Install TinyTeX
         if: matrix.format == 'html'
@@ -65,7 +66,8 @@ jobs:
           # Also render the html template to PDF to check the pdf-export feature
           quarto render ${{ matrix.theme }}/template-html.qmd \
             --to pdf \
-            --output-dir _output
+            --output-dir _output \
+            --output template-html-pdf.pdf
 
       - name: Convert demo to Jupyter Notebook
         if: matrix.format == 'html'
