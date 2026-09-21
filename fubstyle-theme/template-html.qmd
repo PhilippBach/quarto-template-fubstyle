@@ -28,6 +28,16 @@ Jupyter notebook. Change the heading via `title="..."`.
 Show that the OLS estimator is unbiased under the Gauss-Markov assumptions.
 :::
 
+## Solutions
+
+Content in `.solution-block` is shown by default and removed when the
+document is rendered with `solution: false` (front matter, or
+`-M solution:false` on the command line).
+
+::: {.solution-block}
+*Solution:* under the Gauss-Markov assumptions, $E[\hat\beta \mid X] = \beta$.
+:::
+
 ## Centered text
 
 ::: {.center-x}
