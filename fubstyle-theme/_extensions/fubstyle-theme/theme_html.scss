@@ -173,15 +173,14 @@ div.callout {
 
 /* Optional / advanced exercise box: a highlighted callout for optional,
    more challenging exercises aimed at students who want to go further.
-   It piggybacks on Quarto's own (untyped) callout, so besides being styled
-   here for HTML it also renders as a bordered box in PDF, and degrades to
-   a clean blockquote when the document is converted to a Jupyter
-   notebook (`quarto render ... --to ipynb`) -- classes added by a filter
-   at render time do not survive that conversion, so `.callout` must be
-   written explicitly in the source. The 🎓 in the title also doubles as
-   the "icon", since Quarto's icon slot is only wired up for its five
-   built-in callout types. Usage:
-     ::: {.callout .optional-exercise appearance="default" title="🎓 Optional — Advanced Exercise"}
+   The `optional-exercise.lua` filter turns a plain `.optional-exercise`
+   div into Quarto's own (untyped) callout, so besides being styled here
+   for HTML it also renders as a bordered box in PDF. For Jupyter
+   notebooks the same filter emits a plain blockquote instead (see the
+   filter). The 🎓 in the default title doubles as the "icon", since
+   Quarto's icon slot is only wired up for its five built-in callout
+   types. Usage (title="..." is optional):
+     ::: {.optional-exercise}
      ... exercise text ...
      ::: */
 .optional-exercise.callout {

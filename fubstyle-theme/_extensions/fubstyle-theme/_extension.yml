@@ -3,9 +3,13 @@ author: Philipp Bach based on UHH template
 version: 1.0.0
 quarto-required: ">=1.1.0"
 contributes:
+  filters:
+    - optional-exercise.lua
   formats:
     html:
       toc: true
+      filters:
+        - optional-exercise.lua
       theme: [default, theme_html.scss]
       resources:
         - assets/fonts/SourceSans3-Regular.ttf
@@ -16,6 +20,8 @@ contributes:
     revealjs:
       html:
       toc: true
+      filters:
+        - optional-exercise.lua
       theme: [default, theme_revealjs.scss]
       controls: true
       transition: slide
