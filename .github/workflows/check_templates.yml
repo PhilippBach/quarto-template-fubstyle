@@ -7,12 +7,14 @@ on:
       - '**/*.scss'
       - '**/*.lua'
       - '**/*.yml'
+      - '**/*.sh'
   pull_request:
     paths:
       - '**/*.qmd'
       - '**/*.scss'
       - '**/*.lua'
       - '**/*.yml'
+      - '**/*.sh'
   workflow_dispatch:
 
 
@@ -85,6 +87,15 @@ jobs:
             --to ipynb \
             --no-execute \
             --output-dir _output/ipynb
+
+      - name: Test solution-block (solutions shown / hidden)
+        if: matrix.format == 'html'
+        run: |
+          # Renders html, pdf (via its LaTeX source) and ipynb with solution: true,
+          # solution: false and no setting, and checks the solution text is
+          # present / absent accordingly.
+          bash .github/scripts/check_solution_block.sh ${{ matrix.theme }} \
+            ${{ matrix.theme }}/template-html.qmd
 
       - name: Upload rendered outputs
         uses: actions/upload-artifact@v6
