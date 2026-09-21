@@ -5,10 +5,14 @@ on:
     paths:
       - '**/*.qmd'
       - '**/*.scss'
+      - '**/*.lua'
+      - '**/*.yml'
   pull_request:
     paths:
       - '**/*.qmd'
       - '**/*.scss'
+      - '**/*.lua'
+      - '**/*.yml'
   workflow_dispatch:
 
 
@@ -50,13 +54,54 @@ jobs:
 
       - name: Render demo with custom format
         run: |
-          # Renders template-<format>.qmd using the `<theme>-<format>` format
+          # NB: no --output: combined with --output-dir it makes Quarto
+          # write the file outside the output dir. Default file names are used.
+          # Renders template-<format>.qmd using the `<theme>-<format>` format.
+          # Every output type gets its own subfolder of _output so that
+          # renders can never overwrite each other.
           quarto render ${{ matrix.theme }}/template-${{ matrix.format }}.qmd \
             --to ${{ matrix.theme }}-${{ matrix.format }} \
-            --output-dir _output
+            --output-dir _output/${{ matrix.format }}
 
-      - name: Upload rendered slides
+      - name: Install TinyTeX
+        if: matrix.format == 'html'
+        run: quarto install tinytex --no-prompt
+
+      - name: Render demo to PDF
+        if: matrix.format == 'html'
+        run: |
+          # Also render the html template to PDF to check the pdf-export feature
+          quarto render ${{ matrix.theme }}/template-html.qmd \
+            --to pdf \
+            --output-dir _output/pdf
+
+      - name: Render demo to Jupyter Notebook
+        if: matrix.format == 'html'
+        run: |
+          # Checks that the html template degrades gracefully in a notebook
+          # (the optional-exercise filter turns the callout into a blockquote).
+          # --no-execute keeps the notebook free of outputs, as for students.
+          quarto render ${{ matrix.theme }}/template-html.qmd \
+            --to ipynb \
+            --no-execute \
+            --output-dir _output/ipynb
+
+      - name: Upload rendered outputs
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ matrix.theme }}-${{ matrix.format }}
+          # Intermediate artifact per matrix leg (revealjs/ or html/ + pdf/ +
+          # ipynb/); merged into a single artifact by the job below.
+          name: render-${{ matrix.theme }}-${{ matrix.format }}
           path: ${{ matrix.theme }}/_output
+
+  merge-outputs:
+    needs: render-themes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge all rendered outputs into one artifact
+        uses: actions/upload-artifact/merge@v6
+        with:
+          # Contains the revealjs/, html/, pdf/ and ipynb/ subfolders
+          name: rendered-outputs
+          pattern: render-*
+          delete-merged: true

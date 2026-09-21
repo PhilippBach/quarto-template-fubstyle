@@ -43,6 +43,16 @@ regression of the residuals of $y$ on the residuals of $D$, both
 regressed on $X$.
 :::
 
+## Optional exercise box
+
+Use `.optional-exercise` to flag an optional, more advanced
+exercise for students who want an extra challenge. Change the heading
+via `title="..."`.
+
+::: {.optional-exercise}
+Show that the OLS estimator is unbiased under the Gauss-Markov assumptions.
+:::
+
 ## Centered & indented text
 
 ::: {.center-x}
