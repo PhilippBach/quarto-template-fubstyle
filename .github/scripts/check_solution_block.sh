@@ -42,4 +42,14 @@ for entry in "${formats[@]}"; do
   done
 done
 
-exit $((failures > 0 ? 1 : 0))
+if [ "$failures" -gt 0 ]; then
+  echo "::error::solution test FAILED ($failures check(s) failed)"
+  [ -n "${GITHUB_STEP_SUMMARY:-}" ] && echo "### ❌ Solution test failed ($failures check(s))" >> "$GITHUB_STEP_SUMMARY"
+  exit 1
+fi
+
+echo "solution test passed"
+# Visible as an annotation and in the run summary on GitHub (no-ops locally)
+echo "::notice title=Solution test::solution test passed (html, pdf/latex, ipynb: shown by default, hidden with solution: false)"
+[ -n "${GITHUB_STEP_SUMMARY:-}" ] && echo "### ✅ Solution test passed" >> "$GITHUB_STEP_SUMMARY"
+exit 0
