@@ -4,6 +4,9 @@
 -- Same idea as ::: {.content-hidden unless-meta="solution"} ... :::, but
 -- with the default flipped: without `solution:` set, solutions are shown.
 --
+-- Each shown solution starts with a bold title ("Solution" by default;
+-- override per block with `title="..."`, e.g. ::: {.solution-block title="Proof"}).
+--
 -- Note: the class is named "solution-block", not "solution", because Quarto
 -- reserves the bare `.solution` class for its own built-in proof-like
 -- environment (a styled "Solution." callout), which would consume the div
@@ -19,7 +22,12 @@ function Pandoc(doc)
     Div = function(el)
       if el.classes:includes("solution-block") then
         if show_solutions then
-          return el.content
+          local title = el.attributes["title"] or "Solution"
+          local blocks = pandoc.List({
+            pandoc.Para({ pandoc.Strong(pandoc.Inlines(pandoc.Str(title))) })
+          })
+          blocks:extend(el.content)
+          return blocks
         else
           return {}
         end
