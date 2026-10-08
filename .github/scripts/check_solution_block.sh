@@ -9,7 +9,7 @@ set -euo pipefail
 
 theme="$1"
 qmd="$2"
-marker="Solution:"   # text that only occurs inside the .solution-block of the template
+marker="zero conditional mean"   # text that only occurs inside the .solution-block of the template
 
 # <quarto --to value>:<file extension of the result>
 formats=("${theme}-html:html" "latex:tex" "ipynb:ipynb")

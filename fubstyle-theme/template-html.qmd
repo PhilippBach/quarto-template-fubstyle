@@ -35,7 +35,7 @@ document is rendered with `solution: false` (front matter, or
 `-M solution:false` on the command line).
 
 ::: {.solution-block}
-*Solution:* under the Gauss-Markov assumptions, $E[\hat\beta \mid X] = \beta$.
+By the zero conditional mean assumption, $E[\hat\beta \mid X] = \beta$.
 :::
 
 ## Centered text
