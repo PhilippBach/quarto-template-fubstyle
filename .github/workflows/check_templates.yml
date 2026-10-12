@@ -105,6 +105,7 @@ jobs:
           # Renders with solutions (default) and without (solution: false),
           # exports both, and checks page count, slide text and that the
           # solution text is absent from the student copy.
+          sudo apt-get update >/dev/null
           sudo apt-get install -y poppler-utils >/dev/null
           cd ${{ matrix.theme }}
           quarto render template-revealjs.qmd \
