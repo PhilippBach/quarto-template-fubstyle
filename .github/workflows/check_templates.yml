@@ -112,13 +112,17 @@ jobs:
             --to ${{ matrix.theme }}-revealjs --no-execute \
             -M solution:false --output-dir _output/revealjs-student
           marker="zero conditional mean"
+          port=8000
           for variant in revealjs revealjs-student; do
-            (cd _output/$variant && python -m http.server 8000 >/dev/null 2>&1 & echo $! > /tmp/server.pid)
+            # one port per variant, so a slow-to-close server can never serve the wrong deck
+            python -m http.server $port --directory _output/$variant >/dev/null 2>&1 &
+            server=$!
             sleep 2
             npx --yes decktape reveal --chrome-arg=--no-sandbox \
-              http://localhost:8000/template-revealjs.html \
+              http://localhost:$port/template-revealjs.html \
               _output/decktape-$variant.pdf
-            kill "$(cat /tmp/server.pid)"
+            kill $server || true
+            port=$((port + 1))
             pages=$(pdfinfo _output/decktape-$variant.pdf | awk '/^Pages:/ {print $2}')
             echo "$variant: $pages pages"
             [ "$pages" -gt 1 ] || { echo "::error::decktape PDF has $pages page(s)"; exit 1; }
