@@ -97,6 +97,40 @@ jobs:
           bash .github/scripts/check_solution_block.sh ${{ matrix.theme }} \
             ${{ matrix.theme }}/template-html.qmd
 
+      - name: Export slides to PDF with decktape
+        if: matrix.format == 'revealjs'
+        run: |
+          # The in-slide export button uses the browser print dialog; this step
+          # tests the second export route, decktape, on the rendered slides.
+          # Renders with solutions (default) and without (solution: false),
+          # exports both, and checks page count, slide text and that the
+          # solution text is absent from the student copy.
+          sudo apt-get install -y poppler-utils >/dev/null
+          cd ${{ matrix.theme }}
+          quarto render template-revealjs.qmd \
+            --to ${{ matrix.theme }}-revealjs --no-execute \
+            -M solution:false --output-dir _output/revealjs-student
+          marker="zero conditional mean"
+          for variant in revealjs revealjs-student; do
+            (cd _output/$variant && python -m http.server 8000 >/dev/null 2>&1 & echo $! > /tmp/server.pid)
+            sleep 2
+            npx --yes decktape reveal --chrome-arg=--no-sandbox \
+              http://localhost:8000/template-revealjs.html \
+              _output/decktape-$variant.pdf
+            kill "$(cat /tmp/server.pid)"
+            pages=$(pdfinfo _output/decktape-$variant.pdf | awk '/^Pages:/ {print $2}')
+            echo "$variant: $pages pages"
+            [ "$pages" -gt 1 ] || { echo "::error::decktape PDF has $pages page(s)"; exit 1; }
+            pdftotext _output/decktape-$variant.pdf - | grep -q "Optional: Advanced Exercise" \
+              || { echo "::error::slide text missing in $variant PDF"; exit 1; }
+          done
+          pdftotext _output/decktape-revealjs.pdf - | grep -q "$marker" \
+            || { echo "::error::solution missing in decktape PDF with solutions"; exit 1; }
+          if pdftotext _output/decktape-revealjs-student.pdf - | grep -q "$marker"; then
+            echo "::error::solution leaked into student decktape PDF"; exit 1
+          fi
+          echo "decktape export OK"
+
       - name: Upload rendered outputs
         uses: actions/upload-artifact@v6
         with:
