@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Checks that the `.solution-block` filter shows solutions by default / with
 # `solution: true` and removes them with `solution: false`, for html, pdf
-# (checked on the intermediate LaTeX, which needs no TeX install) and ipynb.
+# (checked on the intermediate LaTeX, which needs a TeX install) and ipynb.
 #
 # Usage: check_solution_block.sh <theme> <qmd file>
 #   e.g. check_solution_block.sh fubstyle-theme fubstyle-theme/template-html.qmd
@@ -12,7 +12,7 @@ qmd="$2"
 marker="zero conditional mean"   # text that only occurs inside the .solution-block of the template
 
 # <quarto --to value>:<file extension of the result>
-formats=("${theme}-html:html" "latex:tex" "ipynb:ipynb")
+formats=("${theme}-html:html" "${theme}-pdf:tex" "${theme}-ipynb:ipynb")
 
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
@@ -29,8 +29,10 @@ for entry in "${formats[@]}"; do
 
     out="$tmp/$to-$label"
     # shellcheck disable=SC2086
-    quarto render "$qmd" --to "$to" --no-execute $args --output-dir "$out" >/dev/null 2>&1 \
+    quarto render "$qmd" --to "$to" --no-execute -M keep-tex:true $args --output-dir "$out" >/dev/null 2>&1 \
       || { echo "FAIL: rendering $to ($label) failed"; failures=$((failures + 1)); continue; }
+    # keep-tex writes the .tex next to the source, not into the output dir
+    mv "${qmd%.qmd}.tex" "$out/" 2>/dev/null || true
 
     if grep -rq --include="*.$ext" -F "$marker" "$out"; then found=yes; else found=no; fi
     if [ "$found" = "$expected" ]; then

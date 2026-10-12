@@ -1,4 +1,4 @@
-/* PDF Export Button — sits inline inside the revealjs footer */
+/* PDF Export Button: sits inline inside the revealjs footer */
 
 .footer .pdf-export-btn {
   display: inline-flex;

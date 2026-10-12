@@ -5,10 +5,6 @@ author: "Author"
 institute: "Institute"
 date: today
 date-format: long
-# Needed for formats that don't come from the fubstyle extension (pdf, ipynb);
-# the extension's own html format already loads it.
-filters:
-  - fubstyle-theme
 ---
 
 # Section Heading
