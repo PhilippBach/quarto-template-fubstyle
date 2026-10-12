@@ -12,7 +12,7 @@
 --   `::: {.callout}` fences, so the div is turned into a plain blockquote
 --   with a bold title instead.
 
-local default_title = "🎓 Optional — Advanced Exercise"
+local default_title = "🎓 Optional: Advanced Exercise"
 
 function Div(div)
   if not div.classes:includes("optional-exercise") or div.classes:includes("callout") then

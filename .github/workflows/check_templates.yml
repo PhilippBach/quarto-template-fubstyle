@@ -74,7 +74,7 @@ jobs:
         run: |
           # Also render the html template to PDF to check the pdf-export feature
           quarto render ${{ matrix.theme }}/template-html.qmd \
-            --to pdf \
+            --to ${{ matrix.theme }}-pdf \
             --output-dir _output/pdf
 
       - name: Render demo to Jupyter Notebook
@@ -84,7 +84,7 @@ jobs:
           # (the optional-exercise filter turns the callout into a blockquote).
           # --no-execute keeps the notebook free of outputs, as for students.
           quarto render ${{ matrix.theme }}/template-html.qmd \
-            --to ipynb \
+            --to ${{ matrix.theme }}-ipynb \
             --no-execute \
             --output-dir _output/ipynb
 
